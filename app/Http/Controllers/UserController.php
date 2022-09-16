@@ -98,19 +98,15 @@ class UserController extends Controller
         $employee->join_date = $request->join_date;
         $employee->leave_date = $request->leave_date;
         $employee->status = $request->leave_date == null ? 1 : 0;
-
         if ($request->hasFile('avatar')) {
-            $data = $request->file('avatar');
-            $extension = $data->getClientOriginalExtension();
-            $filename = uniqid(rand()) . 'avatar' . '.' . $extension;
-            $path = public_path('avatar/');
-            $upload_success = $data->move($path, $filename);
-            $avatar = 'avatar/' . $filename;
-        }else {
-          $avatar = '';
-      }
-      $employee->avatar = $avatar;
-        $employee->update();
+          $data = $request->file('avatar');
+          $extension = $data->getClientOriginalExtension();
+          $filename = uniqid(rand()) . 'avatar' . '.' . $extension;
+          $path = public_path('avatar/');
+          $upload_success = $data->move($path, $filename);
+          $employee->avatar = 'avatar/' . $filename;
+          }
+        $employee->save();
         return response()->json([
             'status'=>200,
             'message'=>'User updated successfully'

@@ -59,27 +59,21 @@
                     }
                 });
             }
-            $(document).on('click','#update_emp',function(e){
+            $(document).on('submit','#updateForm',function(e){
                 e.preventDefault();
                 var id = $('#edit_empid').val();
-                var data = {
-                        'fname' : $('#edit_fname').val(),
-                        'email' : $('#edit_email').val(),
-                        'join_date' : $('#edit_join').val(),
-                        'leave_date' : $('#edit_leave').val(),
-                        'status' : $('#edit_status').val(),
-                        'avatar' : $('#edit_avatars').attr('src'),
-                }
+                let editFormData = new FormData($('#updateForm')[0]);
                 $.ajaxSetup({
                         headers:{
                             'X-CSRF-TOKEN' : $('meta[name="_token"]').attr('content')
                         }
                     });
                 $.ajax({
-                        type:'PUT',
+                        type:'POST',
                         url:"{{ url('/update/') }}/"+id,
-                        data:data,
-                        dataType:"json",
+                        data:editFormData,
+                        processData:false,
+                        contentType:false,
                         success:function(response){
                             if(response.status == 404){
                                 $('#success_message').html("");
@@ -125,7 +119,6 @@
                 type:"GET",
                 url:"{{url('/edit/')}}/"+id,
                 success:function(response){
-                    console.log(response);
                     if(response.status==404){
                         $('#success_message').html("");
                         $('#success_message').addClass("alert alert-danger");

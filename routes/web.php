@@ -18,5 +18,5 @@ Route::get('/', [UserController::class, 'index'])->name('index');
 Route::get('/fetchEmp', [UserController::class, 'fetchEmp'])->name('fetchEmp');
 Route::post('/formSubmit', [UserController::class, 'formSubmit'])->name('formSubmit');
 Route::get('/edit/{id}',[UserController::class, 'edit'])->name('edit');
-Route::put('/update/{id}',[UserController::class, 'update'])->name('update');
+Route::post('/update/{id}',[UserController::class, 'update'])->name('update');
 Route::delete('/delete/{id}',[UserController::class, 'delete'])->name('delete');

@@ -79,7 +79,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" enctype="multipart/form-data" method="post" class="form-inline">
+                    <form action="" enctype="multipart/form-data" id="updateForm" method="post" class="form-inline">
                         @csrf
                         <input type="hidden" name="edit_id" id="edit_empid">
                         <div class="form-group row mb-2">
